@@ -1,5 +1,6 @@
 package com.nelioalves.workshopmongo.services;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -40,4 +41,19 @@ public class UserService {
 		Optional<User> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("cannot found the user by the id: " + id));
 	}
+	
+	public User update(User obj) {
+		
+		User newObj = fidByid(obj.getId());
+		updateData(newObj, obj);
+		return repo.save(newObj);
+	}
+
+
+	private void updateData(User newObj, User obj) {
+		newObj.setName(obj.getName());
+		newObj.setEmail(obj.getEmail());
+	}
+
+
 }
