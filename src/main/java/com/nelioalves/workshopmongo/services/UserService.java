@@ -36,5 +36,8 @@ public class UserService {
 		return new User(objDTO.getId(),objDTO.getName(),objDTO.getEmail());
 	}
 	
-	
+	public User deleteById(String id) {
+		Optional<User> obj = repo.findById(id);
+		return obj.orElseThrow(() -> new ObjectNotFoundException("cannot found the user by the id: " + id));
+	}
 }
